@@ -6,8 +6,9 @@ RUN wget -qO - `wget -qO - "https://api.github.com/repos/wez/atomicparsley/relea
 
 
 FROM alpine:latest
-MAINTAINER Jonathan Harris <jonathan@marginal.org.uk>
-ENV GETIPLAYER_OUTPUT=/output GETIPLAYER_PROFILE=/output/.get_iplayer PUID=1000 PGID=100 PORT=1935 BASEURL=
+# Fork from Jonathan Harris <jonathan@marginal.org.uk>
+MAINTAINER Brian Russell
+ENV GETIPLAYER_OUTPUT=/output GETIPLAYER_PROFILE=/output/.get_iplayer PORT=1935 BASEURL=
 EXPOSE $PORT
 VOLUME "$GETIPLAYER_OUTPUT"
 

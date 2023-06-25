@@ -1,14 +1,15 @@
 version: "3.7"
 services:
   get_iplayer:
-    image: marginal/get_iplayer:latest
+    image: bmrussell/get_iplayer:latest
+    container_name: iplayer
+    user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        PUID: 1000 # id -u
-        PGID: 100  # id -g
     volumes:
-      - /destination/on/host:/output
+      - "${OUTPUT}:/output"
     ports:
       - "1935:1935"
+
+    restart: unless-stopped

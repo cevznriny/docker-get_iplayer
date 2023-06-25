@@ -1,5 +1,9 @@
 # get_iplayer PVR Docker image
 
+**NB:** Forked from https://github.com/Marginal/docker-get_iplayer
+
+The Dockerfile is mainly unchanged but this fork moves some environment variables from the Dockerfile to a docker compose file which is my preferred way of working. 
+
 This is a smallish (100MB) Docker image that hosts the [get_iplayer](https://github.com/get-iplayer/get_iplayer/wiki) PVR. It automatically keeps itself up-to-date with the latest version of get_iplayer.
 
 The PVR recording feature runs hourly. The get_iplayer version is updated daily.
@@ -10,7 +14,16 @@ The PVR can be accessed by default on port `1935/tcp`. Set the environment varia
 
 Downloaded TV & radio files will be placed in the `/output` bind mount.
 
-Environment variables `PUID` and `PGID` can be set to dictate the owner and group of downloaded files (useful if you're putting these files in a shared folder).
+Environment variables `PUID` and `PGID` can be set to dictate the owner and group of downloaded files in the `.env` file (useful if you're putting these files in a shared folder).
+
+Example:
+
+```ini
+UID=1000
+GID=1000
+OUTPUT=/destination/on/host
+```
+Replace `/destination/on/host` with your preferred location to save files to.
 
 If you're running behind a reverse proxy set the environment variable `BASEURL` to the full proxy URL.
 
@@ -19,9 +32,13 @@ If you're running behind a reverse proxy set the environment variable `BASEURL` 
 This makes the PVR available on port 1935, and makes downloaded files owned by the current user:
 
 ```sh
-docker run -d -e PUID=`id -u` -e PGID=`id -g` -p 1935:1935 -v /destination/on/host:/output marginal/get_iplayer:latest
+docker-compose up -d
 ```
-Replace `/destination/on/host` with the path of a folder on the host machine where you would like the downloaded files to be placed.
+Once running use from the commandline as:
+
+```bash
+docker exec -it iplayer /bin/sh -c "get_iplayer --url $url"
+```
 
 ## get_iplayer configuration
 
