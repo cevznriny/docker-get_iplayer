@@ -4,6 +4,9 @@ services:
     image: bmrussell/get_iplayer:latest
     container_name: iplayer
     #user: "${UID}:${GID}"
+    environment:
+      - PUID=${UID}
+      - PGID=${GID}
     build:
       context: .
       dockerfile: Dockerfile
