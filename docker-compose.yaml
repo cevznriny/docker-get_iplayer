@@ -3,7 +3,7 @@ services:
   get_iplayer:
     image: bmrussell/get_iplayer:latest
     container_name: iplayer
-    user: "${UID}:${GID}"
+    #user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: Dockerfile
