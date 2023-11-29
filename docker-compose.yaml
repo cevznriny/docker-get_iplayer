@@ -1,9 +1,6 @@
-version: "3.7"
 services:
   get_iplayer:
-    image: bmrussell/get_iplayer:latest
     container_name: iplayer
-    #user: "${UID}:${GID}"
     environment:
       - PUID=${UID}
       - PGID=${GID}
@@ -12,7 +9,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - "${OUTPUT}:/output"
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     ports:
       - "1935:1935"
-
     restart: unless-stopped

@@ -6,10 +6,11 @@ RUN wget -qO - `wget -qO - "https://api.github.com/repos/wez/atomicparsley/relea
 
 
 FROM alpine:latest
-# Fork from Jonathan Harris <jonathan@marginal.org.uk>
-MAINTAINER Brian Russell
+
 ENV GETIPLAYER_OUTPUT=/output GETIPLAYER_PROFILE=/output/.get_iplayer PORT=1935 BASEURL=
+
 EXPOSE $PORT
+
 VOLUME "$GETIPLAYER_OUTPUT"
 
 RUN apk --update --no-cache add ffmpeg perl-cgi perl-mojolicious perl-lwp-protocol-https perl-xml-libxml jq logrotate su-exec tini curl
